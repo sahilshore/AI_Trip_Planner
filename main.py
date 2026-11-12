@@ -7,7 +7,7 @@ import os
 app=FastAPI()
 
 class QueryRequest(BaseModel):
-    query: str
+    question: str
     
 @app.post("/query")
 async def query_travel_agent(query:QueryRequest):
@@ -22,8 +22,7 @@ async def query_travel_agent(query:QueryRequest):
 
         print(f"Graph saved as 'my_graph.png' in {os.getcwd()}")
         
-        # Assuming request is a pydantic object like: {"question": "your text"}
-        messages={"messages": [query.question]}
+        messages = {"messages": [query.question]}
         
         output = react_app.invoke(messages)
 
